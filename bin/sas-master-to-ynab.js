@@ -33,7 +33,7 @@ async function main() {
     
   } catch (error) {
 
-    console.error(error.stack)
+    console.error(error.detail)
 
   } finally {
 
