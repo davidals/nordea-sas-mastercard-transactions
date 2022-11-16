@@ -16,7 +16,7 @@ async function main() {
     const { personNumber, accessToken, budgetId, accountId, allowSendAsCleared } = getRequiredArgs(process.argv);
     const ynabApi = new ynab.API(accessToken)
     
-    browser = await puppeteer.launch({ headless: true })
+    browser = await puppeteer.launch({ headless: false })
     console.log('>>> Open BankID and authorise (30s to timeout)')
 
     const sourceTransactions = await getSourceTransactions(browser, personNumber)
