@@ -53,3 +53,40 @@ curl localhost:5000
 * Node 8.x
 * NPM
 
+## On Mac M1
+
+* You need to install chrome using `brew install chromium`.
+* Then Allow Mac to open it freely: `xattr -cr /Applications/Chromium.app`
+* Then before running NPM install, make sure puppeteer can't install its own Chromium by ```
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium` ```
+* Finally install rosetta-2 to allow using Chromium: `softwareupdate --install-rosetta`
+
+Now you can run it
+
+# launch.json example for mac M1
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/bin/sas-master-to-ynab.js",
+            "args": [
+                "198909141254",
+                "d694777afc5da85f7e49c46ca7609ecd80ba5b75cf9193614e49e13402ee6e6c",
+                "eda4b693-9e4e-4a88-9cdb-3bd8528c7a57",
+                "061b52d7-a0af-4a30-87e1-963f2dca2030"
+            ],
+            "env": {
+                "PUPPETEER_EXECUTABLE_PATH":"/opt/homebrew/bin/chromium"
+            }
+        }
+    ]
+}
+```
