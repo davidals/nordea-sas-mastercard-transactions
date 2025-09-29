@@ -22,12 +22,13 @@ async function main() {
     const sourceTransactions = await getSourceTransactions(browser, personNumber)
     console.log(`${sourceTransactions.length} found in total`)
 
+    
     const filteredTransactions = await filterTransactionsNotSent(ynabApi, sourceTransactions, budgetId, accountId)
     console.log(`${filteredTransactions.length} not yet sent`)
 
     const ynabPayload = await buildYnabPayload(filteredTransactions, accountId, allowSendAsCleared)
     console.log(filteredTransactions)
-
+  
     await ynabApi.transactions.bulkCreateTransactions(budgetId, ynabPayload)
     console.log(`Added ${ynabPayload.transactions.length} transactions to YNAB`)
     
