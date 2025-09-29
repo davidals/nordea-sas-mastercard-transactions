@@ -2,10 +2,11 @@ const puppeteer = require('puppeteer')
 const ynab = require('ynab')
 const adapter = require('../lib/sas-master')
 
-const { 
-  getSourceTransactions, 
-  filterTransactionsNotSent, 
-  buildYnabPayload 
+const {
+  getSourceTransactions,
+  extractAllTransactionsWithInfiniteScroll,
+  filterTransactionsNotSent,
+  buildYnabPayload
 } = adapter
 
 let browser
@@ -19,7 +20,7 @@ async function main() {
     browser = await puppeteer.launch({ headless: false })
     console.log('>>> Open BankID and authorise (30s to timeout)')
 
-    const sourceTransactions = await getSourceTransactions(browser, personNumber)
+    const sourceTransactions = await getSourceTransactions(browser, personNumber, ynabApi, budgetId, accountId)
     console.log(`${sourceTransactions.length} found in total`)
 
     
