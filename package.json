@@ -13,7 +13,8 @@
   "scripts": {
     "dev": "nodemon --inspect ./bin/api.js",
     "start": "node ./bin/api.js",
-    "download-excel": "node ./bin/sas-master-download-excel.js"
+    "download-excel": "node ./bin/sas-master-download-excel.js",
+    "excel-to-ynab": "node ./bin/sas-master-excel-to-ynab.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.21"
